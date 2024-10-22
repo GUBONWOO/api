@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
 
 // YouTube API 호출
-const API_KEY = 'AIzaSyCrqdCKuS-olrjslfT5G7QhFZ45pkcGABM';
+const apiKey = process.env.API_KEY;
 
 export default async function handler(
   req: NextApiRequest,
@@ -17,7 +17,7 @@ export default async function handler(
 
   try {
     const response = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&q=${query}&part=snippet&type=video&maxResults=30`
+      `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&q=${query}&part=snippet&type=video&maxResults=30`
     );
 
     return res.status(200).json(response.data.items);

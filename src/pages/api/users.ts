@@ -1,14 +1,18 @@
 // pages/api/users.ts
 import type { NextApiRequest, NextApiResponse } from 'next';
 import mysql from 'mysql2/promise';
+import dotenv from 'dotenv';
 
 // 데이터베이스 연결 설정
+// .env 파일 로드
+dotenv.config();
+
 const db = mysql.createPool({
-  host: 'localhost', // MySQL 호스트
-  port: 3306, // MySQL 포트
-  user: 'root', // MySQL 사용자 이름
-  password: '1539', // MySQL 비밀번호
-  database: 'bank', // MySQL 데이터베이스 이름
+  host: process.env.DB_HOST, // MySQL 호스트
+  port: process.env.DB_PORT, // MySQL 포트
+  user: process.env.DB_USER, // MySQL 사용자 이름
+  password: process.env.DB_PASSWORD, // MySQL 비밀번호
+  database: process.env.DB_NAME, // MySQL 데이터베이스 이름
 });
 
 export default async function handler(
